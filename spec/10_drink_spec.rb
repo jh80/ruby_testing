@@ -105,11 +105,20 @@ describe Drink do
   end
 
   describe '#full?' do
-    context 'when drink has 16 ounces or more' do
+    context 'when drink has 16 ounces' do
       # Create an explicit subject, using 'described_class' and your choice of
       # beverage type.
       subject(:my_drink) { described_class.new('shake')}
       # remove the 'x' before running this test
+      it 'is full' do
+        expect(my_drink.full?).to eq(true)
+      end
+    end
+
+    # Bonus test developed by me
+    context 'when drink has more than 16 ounces' do
+      subject(:my_drink) { described_class.new('shake', 24)}
+
       it 'is full' do
         expect(my_drink.full?).to eq(true)
       end
