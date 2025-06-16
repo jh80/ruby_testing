@@ -186,6 +186,7 @@ describe FindNumber do
       # be able to pass yet because you haven't written the method!
 
       it 'is game over' do
+        # their answer use a magic matcher: expect(ending_game).to be_game_over
         expect(game_done.game_over?).to eq(true)
       end
     end
