@@ -20,4 +20,13 @@ class FindNumber
     return false unless @answer == @guess
     true
   end
+
+  # should not be accessed if @answer == @guess
+  def update_range
+    if @guess < @answer
+      @min = @guess + 1
+    else 
+      @max = @guess - 1
+    end
+  end
 end
