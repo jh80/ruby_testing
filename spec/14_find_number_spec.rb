@@ -139,6 +139,7 @@ describe FindNumber do
 
     context 'when min is 5 and max is 9' do
       subject(:game_guessing) { described_class.new(5, 9, number_guessing)}
+      
       it 'returns 7' do
         expect(game_guessing.make_guess).to eq(7)
       end
@@ -146,6 +147,7 @@ describe FindNumber do
 
     context 'when min is 8 and max is 9' do
       subject(:game_guessing) { described_class.new(8, 9, number_guessing)}
+      
       it 'returns 8' do
         expect(game_guessing.make_guess).to eq(8)
       end
@@ -153,6 +155,7 @@ describe FindNumber do
 
     context 'when min is 0 and max is 3' do
       subject(:game_guessing) { described_class.new(0, 3, number_guessing)}
+      
       it 'returns 1' do
         expect(game_guessing.make_guess).to eq(1)
       end
@@ -160,6 +163,7 @@ describe FindNumber do
 
     context 'when min and max both equal 3' do
       subject(:game_guessing) { described_class.new(3, 3, number_guessing)}
+      
       it 'returns 3' do
         expect(game_guessing.make_guess).to eq(3)
       end
