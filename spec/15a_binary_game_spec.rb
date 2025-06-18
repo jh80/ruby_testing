@@ -171,14 +171,28 @@ describe BinaryGame do
     # Query Method -> Test the return value
 
     # NOTE: #verify_input will only return a number if it is between?(min, max)
+    subject(:game_input_check) { described_class.new(1, 20) }
+
+    before(:each) do
+      puts "--> verify_input before block"      
+      @min = game_input_check.instance_variable_get(:@minimum)
+      @max = game_input_check.instance_variable_get(:@maximum)
+    end
 
     context 'when given a valid input as argument' do
-      xit 'returns valid input' do
+
+      it 'returns valid input' do
+        valid_input = 11
+        verified_input = game_input_check.verify_input(@min, @max, valid_input)
+        expect(verified_input).to eq(valid_input)
       end
     end
 
     context 'when given invalid input as argument' do
-      xit 'returns nil' do
+      it 'returns nil' do
+        invalid_input = 100
+        verified_return = game_input_check.verify_input(@min, @max, invalid_input)
+        expect(verified_return).to be_nil
       end
     end
   end
