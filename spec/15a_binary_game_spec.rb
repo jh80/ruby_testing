@@ -347,7 +347,7 @@ describe BinaryGame do
     # Write a test for the following context.
     context 'when game_over? is false five times' do
       before do
-        allow(search_display).to receive(:game_over?).and_return(false, false, false, false, false, true )
+        allow(search_display).to receive(:game_over?).and_return( false, false, false, false, false, true )
       end
 
       it 'calls display_turn_order five times' do
@@ -368,21 +368,32 @@ describe BinaryGame do
     #  by calling #display_guess.
 
     # Create a new subject and an instance_double for BinarySearch.
+    subject(:game_turn) { described_class.new(1, 10 )}
+    let(:search_turn) { instance_double(BinarySearch) }
 
     before do
       # You'll need to create a few method stubs.
+      allow(search_turn).to receive(:make_guess)
+      allow(search_turn).to receive(:update_range)
+      allow(game_turn).to receive(:display_guess).with(search_turn)
+      allow(search_turn).to receive(:game_over?)
     end
 
     # Command Method -> Test the change in the observable state
-    xit 'increases guess_count by one' do
+    it 'increases guess_count by one' do
+      expect { game_turn.display_turn_order(search_turn) }.to change { game_turn.instance_variable_get(:@guess_count) }.by(1)
     end
 
     # Method with Outgoing Command -> Test that a message is sent
-    xit 'sends make_guess' do
+    it 'sends make_guess' do
+      expect(search_turn).to receive(:make_guess).once
+      game_turn.display_turn_order(search_turn)
     end
 
     # Method with Outgoing Command -> Test that a message is sent
-    xit 'sends update_range' do
+    it 'sends update_range' do
+      expect(search_turn).to receive(:update_range).once
+      game_turn.display_turn_order(search_turn)
     end
 
     # Using method expectations can be confusing. Stubbing the methods above
@@ -394,7 +405,6 @@ describe BinaryGame do
     # paragraph, move it to the before hook, and run the tests.
     # All of the tests should continue to pass. Replace 'binary_search_turn'
     # with whatever you named your BinarySearch instance double if necessary.
-    # allow(binary_search_turn).to receive(:game_over?)
 
     # Now, in the lib/15a_binary_game.rb file, comment out either line,
     # binary_search.make_guess or binary_search.update_range. Resave the file
